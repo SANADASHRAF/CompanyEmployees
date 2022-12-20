@@ -19,6 +19,7 @@ if (app.Environment.IsDevelopment())
 else
          //HTTP Strict Transport Security "Protect websites from attacks by phishing attackers"
     app.UseHsts();
+
 app.UseHttpsRedirection();
         //enables using static files for the request
 app.UseStaticFiles();
