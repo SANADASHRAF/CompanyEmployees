@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿//This helps us find the  RepositoryContext class in another project while executing migrations
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Repository;
 namespace CompanyEmployees.ContextFactory

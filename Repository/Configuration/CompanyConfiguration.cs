@@ -1,4 +1,5 @@
-﻿using Entities.Models;
+﻿//for inital data for company model
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

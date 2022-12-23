@@ -1,4 +1,5 @@
-﻿using Entities.Models;
+﻿//initial data 
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
