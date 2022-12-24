@@ -5,11 +5,19 @@ using Microsoft.AspNetCore.HttpOverrides;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+        //repository manegar manger
+builder.Services.ConfigureRepositoryManager();
+
         // registers only the controllers in IServiceCollection
 builder.Services.AddControllers();
         //method in extention
 builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
+
+
+
+
 
 var app = builder.Build();
 
