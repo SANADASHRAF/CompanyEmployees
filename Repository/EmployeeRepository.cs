@@ -13,5 +13,7 @@ namespace Repository
         public EmployeeRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
         }
+
+        
     }
 }

@@ -8,8 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 
         //repository manegar manger
 builder.Services.ConfigureRepositoryManager();
+builder.Services.ConfigureServiceManager();
+builder.Services.ConfigureSqlContext(builder.Configuration);
 
-        // registers only the controllers in IServiceCollection
+// registers only the controllers in IServiceCollection
 builder.Services.AddControllers();
         //method in extention
 builder.Services.ConfigureCors();
@@ -45,6 +47,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+//adds endpoints for controller actions without specifying any routes.
 app.MapControllers();
 
 app.Run();

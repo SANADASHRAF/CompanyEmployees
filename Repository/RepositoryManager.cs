@@ -12,6 +12,7 @@ namespace Repository
         
 
         private readonly RepositoryContext _repositoryContext;
+        //
         private readonly Lazy<ICompanyRepository> _companyRepository;
         private readonly Lazy<IEmployeeRepository> _employeeRepository;
         public RepositoryManager(RepositoryContext repositoryContext)

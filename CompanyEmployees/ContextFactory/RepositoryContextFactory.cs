@@ -1,4 +1,6 @@
-﻿//This helps us find the  RepositoryContext class in another project while executing migrations
+﻿//This helps us find the  RepositoryContext class in another project while executing
+//we have registered our RepositoryContext class at design time.
+// RepositoryManager service registration, which happens at runtime and during that registration, we must have RepositoryContext registered as well in the runtime
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Repository;
