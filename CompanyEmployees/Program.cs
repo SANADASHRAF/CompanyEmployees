@@ -16,6 +16,8 @@ builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.AddControllers()
 .AddApplicationPart(typeof(CompanyEmployees.Presentation.AssemblyReference).Assembly);
 
+//using automapper
+builder.Services.AddAutoMapper(typeof(Program));
 
 //method in extention
 builder.Services.ConfigureCors();

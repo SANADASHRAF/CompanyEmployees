@@ -1,4 +1,6 @@
-﻿using Contracts;
+﻿using AutoMapper;
+using Contracts;
+using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,19 +15,27 @@ namespace CompanyEmployees.Presentation.Controllers
     [ApiController]
     public class CompaniesController : ControllerBase
     {
-        private readonly IRepositoryManager x;
-        public CompaniesController(IRepositoryManager x)
+        private readonly IRepositoryManager _repository;
+        private readonly IMapper _mapper;
+        public CompaniesController(IRepositoryManager _repository ,IMapper _mapper)
         {
-            this.x = x;
+            this._repository = _repository;
+            this._mapper = _mapper;
         }
+
+
 
         [HttpGet]
         public IActionResult GetCompanies()
         {
-            var companeies = x.Company.GetAllCompanies();
-            var z=companeies.Select( c =>new CompanyDto(c.Id, c.Name ?? "", string.Join(' ',c.Address, c.Country)))
-            .ToList();
-            return Ok(z);
+
+
+            var companeies = _repository.Company.GetAllCompanies();
+            var companeiesDTO=_mapper.Map<IEnumerable< CompanyDto >>(companeies);
+            //.Select(c => new CompanyDto(c.Id, c.Name ?? "", string.Join(' ', c.Address, c.Country)))
+            //.ToList(); ;
+
+            return Ok(companeiesDTO); 
         }
         }
 }
