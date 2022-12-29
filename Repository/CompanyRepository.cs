@@ -14,8 +14,8 @@ namespace Repository
         {
         }
 
-        public IEnumerable<Company> GetAllCompanies(bool trackChanges) =>
-                FiindAll(trackChanges)
+        public IEnumerable<Company> GetAllCompanies() =>
+                FiindAll()
                .OrderBy(c => c.Name)
                 .ToList();
 }

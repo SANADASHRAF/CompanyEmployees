@@ -15,6 +15,8 @@ namespace Repository
         {
         }
 
+
+        //for adding inital data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new CompanyConfiguration());

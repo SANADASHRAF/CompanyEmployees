@@ -24,7 +24,7 @@ namespace CompanyEmployees.Extensions
 
          });
 
-        //factory manager
+        //repository manager
         public static void ConfigureRepositoryManager(this IServiceCollection services) =>
         services.AddScoped<IRepositoryManager, RepositoryManager>();
 
@@ -36,10 +36,9 @@ namespace CompanyEmployees.Extensions
         //RepositoryContextFactory registered our RepositoryContext class at design time
         // this for RepositoryManager service registration, which happens at runtime
         //to solve problem of RepositoryManagerservice while haappen at runtime and the RepositoryContext happen at designime
-        public static void ConfigureSqlContext(this IServiceCollection services,IConfiguration configuration) =>
-            services.AddDbContext<RepositoryContext>(opts =>
-            opts.UseSqlServer(configuration.GetConnectionString("sqlConnection")));
-
+        
+public static void ConfigureSqlContext(this IServiceCollection services,IConfiguration configuration) =>
+        services.AddSqlServer<RepositoryContext>((configuration.GetConnectionString("sqlConnection")));
 
 
     }
