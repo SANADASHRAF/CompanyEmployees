@@ -12,13 +12,14 @@ builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureSqlContext(builder.Configuration);
 
 // registers only the controllers in IServiceCollection
-builder.Services.AddControllers();
-        //method in extention
+//and add refrence to presentation layer to know where controller is
+builder.Services.AddControllers()
+.AddApplicationPart(typeof(CompanyEmployees.Presentation.AssemblyReference).Assembly);
+
+
+//method in extention
 builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
-
-
-
 
 
 var app = builder.Build();
