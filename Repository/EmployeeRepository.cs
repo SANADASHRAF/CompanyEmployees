@@ -14,6 +14,14 @@ namespace Repository
         {
         }
 
-        
+        public IEnumerable<Employee> GetAllEmployee()
+        {
+            return FiindAll().OrderBy(x => x.Name).ToList();
+        }
+
+        public IEnumerable<Employee> GetEmployeesByIdForCompany(Guid id)
+        {
+            return FindByCondition(x => x.CompanyId.Equals(id)).OrderBy(x => x.Name).ToList();
+        }
     }
 }
