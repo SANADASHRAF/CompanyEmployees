@@ -3,13 +3,14 @@ using Entities.Models;
 using Shared;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Repository
 {
-    internal sealed class CompanyRepository:RepositoryBase<Company> , ICompanyRepository
+    public sealed class CompanyRepository:RepositoryBase<Company> , ICompanyRepository
     {
         public CompanyRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
@@ -21,6 +22,13 @@ namespace Repository
                 .ToList();
 
        
+        public Company? GetCompanyById(Guid companyId) =>
+            FindByCondition(c => c.Id.Equals(companyId)).SingleOrDefault();
+        
+
+        
+
+
     }
     }
 

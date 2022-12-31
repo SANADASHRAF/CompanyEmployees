@@ -28,14 +28,26 @@ namespace CompanyEmployees.Presentation.Controllers
         [HttpGet]
         public IActionResult GetCompanies()
         {
-
-
             var companeies = _repository.Company.GetAllCompanies();
             var companeiesDTO=_mapper.Map<IEnumerable< CompanyDto >>(companeies);
+            //with DTO only without automapper
             //.Select(c => new CompanyDto(c.Id, c.Name ?? "", string.Join(' ', c.Address, c.Country)))
             //.ToList(); ;
-
             return Ok(companeiesDTO); 
         }
+
+        [HttpGet("{id:Guid}")]
+        public IActionResult GetCompany(Guid id)
+        {
+            var company=_repository.Company.GetCompanyById(id);
+            var companyDTO=_mapper.Map< CompanyDto>(company);
+            if (companyDTO is null)
+                return BadRequest($"company with id{id} not exist");
+            else
+                return Ok(companyDTO);
         }
+
+        
+           
+    }
 }

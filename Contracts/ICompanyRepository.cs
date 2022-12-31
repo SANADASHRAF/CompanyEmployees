@@ -12,5 +12,6 @@ namespace Contracts
     public interface ICompanyRepository
     {
         IEnumerable<Company> GetAllCompanies();
+        Company? GetCompanyById(Guid companyId);
     }
 }
