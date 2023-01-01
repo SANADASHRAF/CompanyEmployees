@@ -9,7 +9,9 @@ namespace Contracts
 {
     public interface IEmployeeRepository
     {
-       public IEnumerable<Employee> GetAllEmployee();
-        public IEnumerable< Employee> GetEmployeesByIdForCompany(Guid id);
+         IEnumerable<Employee> GetAllEmployee();
+         Employee? GetEmployeesById(Guid id);
+
+        IEnumerable<Employee> GetEmployees(Guid companyId);
     }
 }

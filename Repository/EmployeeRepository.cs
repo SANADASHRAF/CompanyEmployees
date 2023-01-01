@@ -19,9 +19,16 @@ namespace Repository
             return FiindAll().OrderBy(x => x.Name).ToList();
         }
 
-        public IEnumerable<Employee> GetEmployeesByIdForCompany(Guid id)
+        public Employee? GetEmployeesById(Guid id)
         {
-            return FindByCondition(x => x.CompanyId.Equals(id)).OrderBy(x => x.Name).ToList();
+            return FindByCondition(x => x.Id.Equals(id)).OrderBy(x => x.Name).SingleOrDefault();
         }
+
+        public IEnumerable<Employee> GetEmployees(Guid companyId)
+        {
+           return  FindByCondition(e => e.CompanyId.Equals(companyId)).OrderBy(e => e.Name).ToList();
+
+        }
+ 
     }
 }
