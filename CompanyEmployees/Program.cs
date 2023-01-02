@@ -8,7 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 
         //repository manegar manger
 builder.Services.ConfigureRepositoryManager();
-builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureSqlContext(builder.Configuration);
 
 // registers only the controllers in IServiceCollection

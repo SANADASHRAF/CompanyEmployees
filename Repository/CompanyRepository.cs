@@ -16,17 +16,21 @@ namespace Repository
         {
         }
 
-        public IEnumerable<Company> GetAllCompanies() =>
-                FiindAll()
-               .OrderBy(c => c.Name)
-                .ToList();
+        public IEnumerable<Company> GetAllCompanies()
+        {
+          return  FiindAll().OrderBy(c => c.Name).ToList();
+        }
 
-       
-        public Company? GetCompanyById(Guid companyId) =>
-            FindByCondition(c => c.Id.Equals(companyId)).SingleOrDefault();
-        
+        public Company? GetCompanyById(Guid companyId)
+        {
+          return FindByCondition(c => c.Id.Equals(companyId)).SingleOrDefault();
+        }
 
-        
+        public void CreateCompany(Company company)
+        {
+            Create(company);
+
+        }
 
 
     }

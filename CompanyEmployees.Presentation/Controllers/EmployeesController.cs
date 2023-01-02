@@ -25,8 +25,7 @@ namespace CompanyEmployees.Presentation.Controllers
         }
 
 
-        [HttpGet]
-        [ActionName("GetAllEmployee")]
+        [HttpGet (Name = "GetAllEmployee")]
         public IActionResult GetAllEmployee()
         {
             var Employees = _repository.Employee.GetAllEmployee();
@@ -37,11 +36,9 @@ namespace CompanyEmployees.Presentation.Controllers
         }
 
 
-        [HttpGet("{companyId:Guid}")]
-        [ActionName("GetEmployeesByIdForCompany")]
+        [HttpGet("{companyId:Guid}",Name = "GetEmployeesByIdForCompany")]
         public IActionResult GetEmployeesByIdForCompany(Guid companyId)
         {
-
             var company = _repository.Company.GetCompanyById(companyId);
             if (company is null)
                 return BadRequest($"no result for company with id {companyId}");
@@ -49,8 +46,10 @@ namespace CompanyEmployees.Presentation.Controllers
             var employeesDto = _mapper.Map<IEnumerable<EmployeeDto>>(employeesFromDb);
             return Ok(employeesDto);
         }
-        [HttpGet("{id:Guid}")]
-        [ActionName("GetEmployeeById")]
+
+
+
+        [HttpGet("{id:Guid}",Name = "GetEmployee")]
         public IActionResult GetEmployee(Guid id)
         {
             var Employeees = _repository.Employee.GetEmployeesById(id);

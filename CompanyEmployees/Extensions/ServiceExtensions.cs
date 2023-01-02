@@ -1,7 +1,5 @@
 ﻿ using Contracts;
 using Repository;
-using Service.Contracts;
-using Service;
 using Microsoft.EntityFrameworkCore;
 
 namespace CompanyEmployees.Extensions
@@ -27,10 +25,6 @@ namespace CompanyEmployees.Extensions
         //repository manager
         public static void ConfigureRepositoryManager(this IServiceCollection services) =>
         services.AddScoped<IRepositoryManager, RepositoryManager>();
-
-        //for  service layer
-        public static void ConfigureServiceManager(this IServiceCollection services) =>
-                services.AddScoped<IServiceManager, ServiceManager>();
 
 
         //RepositoryContextFactory registered our RepositoryContext class at design time

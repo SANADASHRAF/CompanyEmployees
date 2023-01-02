@@ -11,7 +11,7 @@ using static Shared.DataTransferObjects;
 
 namespace CompanyEmployees.Presentation.Controllers
 {
-    [Route("api/companies")]
+    [Route("api/companies/[action]")]
     [ApiController]
     public class CompaniesController : ControllerBase
     {
@@ -25,7 +25,7 @@ namespace CompanyEmployees.Presentation.Controllers
 
 
 
-        [HttpGet]
+        [HttpGet (Name = "GetCompanies")]
         public IActionResult GetCompanies()
         {
             var companeies = _repository.Company.GetAllCompanies();
@@ -36,7 +36,7 @@ namespace CompanyEmployees.Presentation.Controllers
             return Ok(companeiesDTO); 
         }
 
-        [HttpGet("{id:Guid}")]
+        [HttpGet("{id:Guid}",Name = "GetCompany")]
         public IActionResult GetCompany(Guid id)
         {
             var company=_repository.Company.GetCompanyById(id);
@@ -47,7 +47,19 @@ namespace CompanyEmployees.Presentation.Controllers
                 return Ok(companyDTO);
         }
 
-        
-           
+        [HttpPost (Name = "CreateCompany")]
+        public IActionResult CreateCompany([FromBody] Company company)
+        {
+            if (company == null)
+                return BadRequest("this is an empty opject");
+            _repository.Company.CreateCompany(company);
+            _repository.Save();
+            var companyToReturn = _mapper.Map<CompanyDto>(company);
+            return CreatedAtRoute("GetCompany", new {id=companyToReturn.Id},companyToReturn);
+        }
+
+
+
+
     }
 }
