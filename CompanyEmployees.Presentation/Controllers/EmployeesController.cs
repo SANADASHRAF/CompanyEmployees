@@ -67,9 +67,13 @@ namespace CompanyEmployees.Presentation.Controllers
         [HttpPost ("{CompanyId:Guid}", Name ="CreatEmployee")]
         public IActionResult CreatEmployee(Guid CompanyId, [FromBody] EmployeeCreationDto employeeCreationDto)
         {
+            ArgumentNullException.ThrowIfNull(employeeCreationDto);
             var company=_repository.Company.GetCompanyById(CompanyId);
-            if(company is null)
-                return NotFound($"there is no company with id {CompanyId}");
+
+            //if(company is null)
+            //    return BadRequest($"there is no company with id {CompanyId}");
+            ArgumentNullException.ThrowIfNull(company);
+
             var employeeEntity=_mapper.Map<Employee>(employeeCreationDto);
             _repository.Employee.Create(CompanyId, employeeEntity);
             _repository.Save();
