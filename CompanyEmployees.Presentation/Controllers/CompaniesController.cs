@@ -47,6 +47,7 @@ namespace CompanyEmployees.Presentation.Controllers
                 return Ok(companyDTO);
         }
 
+
         [HttpPost (Name = "CreateCompany")]
         public IActionResult CreateCompany([FromBody] CompanyCreationDto company)
         {
@@ -57,6 +58,20 @@ namespace CompanyEmployees.Presentation.Controllers
             _repository.Save();
             var companyToReturn = _mapper.Map<CompanyDto>(entitcompanyEntity);
             return CreatedAtRoute("GetCompany", new {id=companyToReturn.Id},companyToReturn);
+        }
+
+
+
+        [HttpPost(Name = "CreateCompanyWithChild")]
+        public IActionResult CreateCompanyWithChild([FromBody] CompanyForCreationDto company)
+        {
+            var entitcompanyEntity = _mapper.Map<Company>(company);
+            if (company == null)
+                return BadRequest("this is an empty opject");
+            _repository.Company.CreateCompany(entitcompanyEntity);
+            _repository.Save();
+            var companyToReturn = _mapper.Map<CompanyDto>(entitcompanyEntity);
+            return CreatedAtRoute("GetCompany", new { id = companyToReturn.Id }, companyToReturn);
         }
 
 

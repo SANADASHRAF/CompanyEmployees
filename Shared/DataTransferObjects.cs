@@ -10,9 +10,15 @@ namespace Shared
     {
         public record CompanyDto(Guid Id, string Name, string FullAddress);
         public record CompanyCreationDto(string Name, string Address, string Country);
+
+        //create company with child
+        public record CompanyForCreationDto(string Name, string Address, string Country,
+                                       IEnumerable<EmployeeCreationDto> Employees);
         public record EmployeeDto(Guid Id, string Name, int Age, string Position);
-        public record EmployeeCreationDto(string Name, string Age, string Position);
+        public record EmployeeCreationDto(string Name, int Age, string Position);
         
+
+       
 
     }
 }
