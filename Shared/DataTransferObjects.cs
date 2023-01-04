@@ -9,8 +9,10 @@ namespace Shared
     public class DataTransferObjects
     {
         public record CompanyDto(Guid Id, string Name, string FullAddress);
-        public record EmployeeDto(Guid Id, string Name, int Age, string Position);
         public record CompanyCreationDto(string Name, string Address, string Country);
+        public record EmployeeDto(Guid Id, string Name, int Age, string Position);
+        public record EmployeeCreationDto(string Name, string Age, string Position);
+        
 
     }
 }

@@ -36,6 +36,8 @@ namespace CompanyEmployees.Presentation.Controllers
         }
 
 
+
+
         [HttpGet("{companyId:Guid}",Name = "GetEmployeesByIdForCompany")]
         public IActionResult GetEmployeesByIdForCompany(Guid companyId)
         {
@@ -49,6 +51,7 @@ namespace CompanyEmployees.Presentation.Controllers
 
 
 
+
         [HttpGet("{id:Guid}",Name = "GetEmployee")]
         public IActionResult GetEmployee(Guid id)
         {
@@ -57,6 +60,21 @@ namespace CompanyEmployees.Presentation.Controllers
                 return BadRequest($"no result for employee with id {id}");
             var EmployeeesDTO = _mapper.Map<EmployeeDto>(Employeees);
             return Ok(EmployeeesDTO);
+        }
+
+
+
+        [HttpPost ("{CompanyId:Guid}", Name ="CreatEmployee")]
+        public IActionResult CreatEmployee(Guid CompanyId, [FromBody] EmployeeCreationDto employeeCreationDto)
+        {
+            var company=_repository.Company.GetCompanyById(CompanyId);
+            if(company is null)
+                return NotFound($"there is no company with id {CompanyId}");
+            var employeeEntity=_mapper.Map<Employee>(employeeCreationDto);
+            _repository.Employee.Create(CompanyId, employeeEntity);
+            _repository.Save();
+            var createdemployee = _mapper.Map<EmployeeDto>(employeeEntity);
+            return CreatedAtRoute("GetEmployee", new { id = createdemployee.Id }, createdemployee);
         }
 
     }

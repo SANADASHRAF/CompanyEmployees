@@ -29,6 +29,11 @@ namespace Repository
            return  FindByCondition(e => e.CompanyId.Equals(companyId)).OrderBy(e => e.Name).ToList();
 
         }
+        public void Create(Guid CompanyId, Employee employee)
+        {
+            employee.CompanyId = CompanyId;
+            Create(employee);
+        }
  
     }
 }
