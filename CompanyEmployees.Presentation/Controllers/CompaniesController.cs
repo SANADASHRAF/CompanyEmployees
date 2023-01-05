@@ -41,19 +41,16 @@ namespace CompanyEmployees.Presentation.Controllers
         {
             var company=_repository.Company.GetCompanyById(id);
             var companyDTO=_mapper.Map< CompanyDto>(company);
-            if (companyDTO is null)
-                return BadRequest($"company with id{id} not exist");
-            else
-                return Ok(companyDTO);
+            ArgumentNullException.ThrowIfNull(companyDTO);
+             return Ok(companyDTO);
         }
 
 
         [HttpPost (Name = "CreateCompany")]
         public IActionResult CreateCompany([FromBody] CompanyCreationDto company)
         {
+            ArgumentNullException.ThrowIfNull(company);
             var entitcompanyEntity=_mapper.Map<Company>(company);
-            if (company == null)
-                return BadRequest("this is an empty opject");
             _repository.Company.CreateCompany(entitcompanyEntity);
             _repository.Save();
             var companyToReturn = _mapper.Map<CompanyDto>(entitcompanyEntity);
@@ -65,9 +62,8 @@ namespace CompanyEmployees.Presentation.Controllers
         [HttpPost(Name = "CreateCompanyWithChild")]
         public IActionResult CreateCompanyWithChild([FromBody] CompanyForCreationDto company)
         {
-            var entitcompanyEntity = _mapper.Map<Company>(company);
-            if (company == null)
-                return BadRequest("this is an empty opject");
+            ArgumentNullException.ThrowIfNull(company);
+            var entitcompanyEntity = _mapper.Map<Company>(company);         
             _repository.Company.CreateCompany(entitcompanyEntity);
             _repository.Save();
             var companyToReturn = _mapper.Map<CompanyDto>(entitcompanyEntity);
