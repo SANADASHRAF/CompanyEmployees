@@ -13,5 +13,6 @@ namespace Contracts
         Employee? GetEmployeesById(Guid id);
         IEnumerable<Employee> GetEmployees(Guid companyId);
         void Create(Guid CompanyId, Employee employee);
+        void DeleteEmployee(Employee employee);
     }
 }
