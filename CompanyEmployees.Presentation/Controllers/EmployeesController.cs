@@ -90,7 +90,7 @@ namespace CompanyEmployees.Presentation.Controllers
             ArgumentNullException.ThrowIfNull(employee);
             _repository.Employee.DeleteEmployee(employee);
             _repository.Save();
-            return Ok("deleted");
+            return NoContent();
         }
 
     }
