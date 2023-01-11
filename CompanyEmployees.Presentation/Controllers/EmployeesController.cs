@@ -18,6 +18,7 @@ namespace CompanyEmployees.Presentation.Controllers
     {
         private readonly IRepositoryManager _repository;
         private readonly IMapper _mapper;
+
         public EmployeesController(IRepositoryManager _repository,IMapper _mapper)
         {
             this._repository = _repository;
@@ -91,6 +92,17 @@ namespace CompanyEmployees.Presentation.Controllers
             _repository.Employee.DeleteEmployee(employee);
             _repository.Save();
             return NoContent();
+        }
+
+        [HttpPut ("{employeeid:Guid}" ,Name = "UpdateEmployee")]
+        public IActionResult UpdateEmployee([FromBody]EmployeeCreationDto employee,Guid employeeid)
+        {
+            var employeeEntity = _repository.Employee.GetEmployeesById(employeeid);
+            ArgumentNullException.ThrowIfNull(employeeEntity) ;
+            _mapper.Map( employee,employeeEntity);
+            _repository.Save();
+            return Ok("Created Successfully");
+
         }
 
     }

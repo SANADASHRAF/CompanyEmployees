@@ -14,5 +14,7 @@ namespace Contracts
         IEnumerable<Employee> GetEmployees(Guid companyId);
         void Create(Guid CompanyId, Employee employee);
         void DeleteEmployee(Employee employee);
+        void UpdateEmployee(Employee employee);
+
     }
 }
