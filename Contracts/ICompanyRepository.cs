@@ -15,5 +15,6 @@ namespace Contracts
         Company? GetCompanyById(Guid companyId);
         void CreateCompany(Company company);
         void DeleteCompany(Company company);
+        void UpdateCompany(Company company);
     }
 }

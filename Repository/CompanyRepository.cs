@@ -36,6 +36,11 @@ namespace Repository
         {
             Delete(company);
         }
+
+        public void UpdateCompany(Company company)
+        {
+            Update(company);
+        }
     }
     }
 

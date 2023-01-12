@@ -11,7 +11,7 @@ namespace CompanyEmployees
             // destination to  -> sourse(in controller)
             // sourse to       -> destination (while creating)
             //_mapper.Map<Employee>(employeeCreationDto);
-            //_mapper.Map(employeeForUpdate, employeeEntity) "لو هتباصى لاول ارجيزمنت اوبجكت"
+            //_mapper.Map(employeeForUpdate, employeeEntity) "source->destination" "لو هتباصى لاول ارجيزمنت اوبجكت"
 
 
 
@@ -24,6 +24,7 @@ namespace CompanyEmployees
             CreateMap<CompanyCreationDto, Company>();
             CreateMap<CompanyForCreationDto, Company>();
             CreateMap<EmployeeCreationDto, Employee>();
+            CreateMap<CompanyForUpdateDto, Company>();
         }
 
     }

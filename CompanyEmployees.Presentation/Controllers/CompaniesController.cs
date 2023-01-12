@@ -81,5 +81,17 @@ namespace CompanyEmployees.Presentation.Controllers
             return Ok($"Company with id {companyid} already has been deleted");
         }
 
+
+        [HttpPut (Name ="UpdateCompany")]
+        public IActionResult UpdateCompany([FromBody]CompanyForUpdateDto company,Guid CompanyId)
+        {
+            var SelectedCompany=_repository.Company.GetCompanyById(CompanyId);
+            ArgumentNullException.ThrowIfNull(SelectedCompany);
+            var CompanyEntity = _mapper.Map(company, SelectedCompany);
+            _repository.Company.UpdateCompany(CompanyEntity);
+            _repository.Save();
+            return Ok($"the company with id {CompanyId} has been updeted successfully")
+        }
+
     }
 }
