@@ -82,10 +82,21 @@ namespace CompanyEmployees.Presentation.Controllers
         }
 
 
-        [HttpPut ("{CompanyId:Guid}", Name ="UpdateCompany")]
-        public IActionResult UpdateCompany([FromBody]CompanyForUpdateDto company,Guid CompanyId)
+        [HttpPut ("{CompanyId:Guid}", Name = "UpdateCompanyWithInsertion")]
+        public IActionResult UpdateCompanyWithInsertion([FromBody] CompanyForUpdateWithInsertChieldDto company,Guid CompanyId)
         {
             var SelectedCompany=_repository.Company.GetCompanyById(CompanyId);
+            ArgumentNullException.ThrowIfNull(SelectedCompany);
+            var CompanyEntity = _mapper.Map(company, SelectedCompany);
+            _repository.Company.UpdateCompany(CompanyEntity);
+            _repository.Save();
+            return Ok($"the company with id {CompanyId} has been updeted successfully");
+        }
+
+        [HttpPut("{CompanyId:Guid}", Name = "UpdateCompanyWithOutInsertion")]
+        public IActionResult UpdateCompanyWithOutInsertion([FromBody] CompanyForUpdateWithOutInsertChieldDto company, Guid CompanyId)
+        {
+            var SelectedCompany = _repository.Company.GetCompanyById(CompanyId);
             ArgumentNullException.ThrowIfNull(SelectedCompany);
             var CompanyEntity = _mapper.Map(company, SelectedCompany);
             _repository.Company.UpdateCompany(CompanyEntity);
