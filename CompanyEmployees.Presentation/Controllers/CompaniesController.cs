@@ -82,7 +82,7 @@ namespace CompanyEmployees.Presentation.Controllers
         }
 
 
-        [HttpPut (Name ="UpdateCompany")]
+        [HttpPut ("{CompanyId:Guid}", Name ="UpdateCompany")]
         public IActionResult UpdateCompany([FromBody]CompanyForUpdateDto company,Guid CompanyId)
         {
             var SelectedCompany=_repository.Company.GetCompanyById(CompanyId);
@@ -90,7 +90,7 @@ namespace CompanyEmployees.Presentation.Controllers
             var CompanyEntity = _mapper.Map(company, SelectedCompany);
             _repository.Company.UpdateCompany(CompanyEntity);
             _repository.Save();
-            return Ok($"the company with id {CompanyId} has been updeted successfully")
+            return Ok($"the company with id {CompanyId} has been updeted successfully");
         }
 
     }
