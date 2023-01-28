@@ -9,9 +9,11 @@ namespace Shared
 {
     public class DataTransferObjects
     {
-        public record CompanyDto(Guid Id, string Name, string FullAddress);
+        
 
-        public record CompanyCreationDto {
+        //this for instead of repeat this validation in every record that have same properity we use inheritanse
+        public record CompanyWithoutchiledForManipulationDto
+        {
             [Required(ErrorMessage = "Company name is a required field.")]
             [MaxLength(30, ErrorMessage = "Maximum length for the Name is 30 characters.")]
             [MinLength(3, ErrorMessage = "minimum length for the Name is 3 characters.")]
@@ -24,18 +26,30 @@ namespace Shared
 
             [Required(ErrorMessage = "Company name is a required field.")]
             [MaxLength(30, ErrorMessage = "Maximum length for the Country is 30 characters.")]
-           
+
             public string? Country { get; init; }
+        }
+
+        public record CompanyWithChieldForManipulationDto
+        {
+            [Required(ErrorMessage = "Company name is a required field.")]
+            [MaxLength(30, ErrorMessage = "Maximum length for the Name is 30 characters.")]
+            [MinLength(3, ErrorMessage = "minimum length for the Name is 3 characters.")]
+            public string? Name { get; init; }
+
+            [Required(ErrorMessage = "Company Adress name is a required field.")]
+            [MaxLength(30, ErrorMessage = "Maximum length for the Adress is 30 characters.")]
+            [MinLength(3, ErrorMessage = "minimum length for the Adress is 3 characters.")]
+            public string? Address { get; init; }
+
+            [Required(ErrorMessage = "Company name is a required field.")]
+            [MaxLength(30, ErrorMessage = "Maximum length for the Country is 30 characters.")]
+
+            public string? Country { get; init; }
+
+            [Required(ErrorMessage = "you should have add empioyees")]
+            public IEnumerable<EmployeeCreationDto>? Employees;
         };
-
-        public record CompanyForCreationDto(string Name, string Address, string Country,
-                                     IEnumerable<EmployeeCreationDto> Employees);
-        public record CompanyForUpdateWithInsertChieldDto(string Name, string Address, string Country,
-                                    IEnumerable<EmployeeCreationDto> Employees);
-       
-        public record CompanyForUpdateWithOutInsertChieldDto(string Name, string Address, string Country);
-
-        public record EmployeeDto(Guid Id, string Name, int Age, string Position);
 
         public record EmployeeForManipulationDto
         {
@@ -51,10 +65,19 @@ namespace Shared
             [MaxLength(20, ErrorMessage = "Maximum length for the Position is 20 characters.")]
             public string? Position { get; init; }
         };
+
+        //public record CompanyForCreationDto(string Name, string Address, string Country,
+        //                             IEnumerable<EmployeeCreationDto> Employees);
+        //public record CompanyForUpdateWithInsertChieldDto(string Name, string Address, string Country,
+        //                            IEnumerable<EmployeeCreationDto> Employees);
+
+        public record CompanyDto(Guid Id, string Name, string FullAddress);
+        public record CompanyForCreationDto : CompanyWithChieldForManipulationDto;
+        public record CompanyForUpdateWithInsertChieldDto: CompanyWithChieldForManipulationDto;
+        public record CompanyForUpdateWithOutInsertChieldDto: CompanyWithoutchiledForManipulationDto;
+        public record CompanyCreationDto : CompanyWithoutchiledForManipulationDto;
+        public record EmployeeDto(Guid Id, string Name, int Age, string Position);   
         public record EmployeeCreationDto : EmployeeForManipulationDto;
-
-
-
         public record EmployeeForUpdateDto: EmployeeForManipulationDto;
 
 
