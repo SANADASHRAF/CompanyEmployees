@@ -103,6 +103,8 @@ namespace CompanyEmployees.Presentation.Controllers
         {
             var employeeEntity = _repository.Employee.GetEmployeesById(employeeid);
             ArgumentNullException.ThrowIfNull(employeeEntity) ;
+            if (!ModelState.IsValid)
+                return UnprocessableEntity(ModelState);
             _mapper.Map( employee,employeeEntity);
             _repository.Save();
             return Ok("Created Successfully");
