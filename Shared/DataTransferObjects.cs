@@ -10,7 +10,22 @@ namespace Shared
     public class DataTransferObjects
     {
         public record CompanyDto(Guid Id, string Name, string FullAddress);
-        public record CompanyCreationDto(string Name, string Address, string Country);
+        public record CompanyCreationDto {
+            [Required(ErrorMessage = "Company name is a required field.")]
+            [MaxLength(30, ErrorMessage = "Maximum length for the Name is 30 characters.")]
+            [MinLength(3, ErrorMessage = "minimum length for the Name is 3 characters.")]
+            public string? Name { get; init; }
+
+            [Required(ErrorMessage = "Company Adress name is a required field.")]
+            [MaxLength(30, ErrorMessage = "Maximum length for the Adress is 30 characters.")]
+            [MinLength(3, ErrorMessage = "minimum length for the Adress is 3 characters.")]
+            public string? Address { get; init; }
+
+            [Required(ErrorMessage = "Company name is a required field.")]
+            [MaxLength(30, ErrorMessage = "Maximum length for the Country is 30 characters.")]
+           
+            public string? Country { get; init; }
+        };
         public record CompanyForCreationDto(string Name, string Address, string Country,
                                      IEnumerable<EmployeeCreationDto> Employees);
         public record CompanyForUpdateWithInsertChieldDto(string Name, string Address, string Country,

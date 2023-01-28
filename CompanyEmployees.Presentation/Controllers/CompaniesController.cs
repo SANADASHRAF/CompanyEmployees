@@ -50,6 +50,10 @@ namespace CompanyEmployees.Presentation.Controllers
         public IActionResult CreateCompany([FromBody] CompanyCreationDto company)
         {
             ArgumentNullException.ThrowIfNull(company);
+
+            if (!ModelState.IsValid)
+                return UnprocessableEntity(ModelState);
+
             var entitcompanyEntity = _mapper.Map<Company>(company);
             _repository.Company.CreateCompany(entitcompanyEntity);
             _repository.Save();
