@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Entities.Models;
+using Shared.RequestFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,14 @@ namespace Repository
         public IEnumerable<Employee> GetAllEmployee()
         {
             return FiindAll().OrderBy(x => x.Name).ToList();
+        }
+
+
+        public IEnumerable<Employee> FilterEmployeeWithAge(EmployeeParameters option)
+        {
+            return FindByCondition(x => (x.Age >= option.MinAge 
+                                     && x.Age <= option.MaxAge) )
+                             .OrderBy(x => x.Name).ToList();
         }
 
         public Employee? GetEmployeesById(Guid id)
@@ -44,5 +53,7 @@ namespace Repository
         {
             Update(employee);
         }
+
+       
     }
 }

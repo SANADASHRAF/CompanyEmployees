@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using Shared.RequestFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace Contracts
     public interface IEmployeeRepository
     {
         IEnumerable<Employee> GetAllEmployee();
+        IEnumerable<Employee> FilterEmployeeWithAge(EmployeeParameters employeeParameters);
         Employee? GetEmployeesById(Guid id);
         IEnumerable<Employee> GetEmployees(Guid companyId);
         void Create(Guid CompanyId, Employee employee);

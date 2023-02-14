@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static Shared.DataTransferObjects;
 using Entities.Models;
+using Shared.RequestFeatures;
 
 namespace CompanyEmployees.Presentation.Controllers
 {
@@ -37,6 +38,21 @@ namespace CompanyEmployees.Presentation.Controllers
         }
 
 
+        
+        [HttpGet(Name = "GetEmployeesWithAge")]
+        public IActionResult GetEmployeesWithAge([FromBody]EmployeeParameters employeeParameters)
+        {
+            if (!employeeParameters.ValidAgeRange)
+                return BadRequest("Max age can't be less than min age");
+
+            var Employees = _repository.Employee.FilterEmployeeWithAge(employeeParameters);
+            if (Employees.Count()==0)
+                return BadRequest($"there is no employee in this range");
+            var EmployeesDTO = _mapper.Map<IEnumerable<EmployeeDto>>(Employees);
+            return Ok(EmployeesDTO);
+        }
+
+        
 
 
         [HttpGet("{companyId:Guid}",Name = "GetEmployeesByIdForCompany")]
