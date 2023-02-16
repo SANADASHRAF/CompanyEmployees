@@ -1,6 +1,8 @@
 ﻿ using Contracts;
 using Repository;
 using Microsoft.EntityFrameworkCore;
+using Entities.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace CompanyEmployees.Extensions
 {
@@ -30,10 +32,29 @@ namespace CompanyEmployees.Extensions
         //RepositoryContextFactory registered our RepositoryContext class at design time
         // this for RepositoryManager service registration, which happens at runtime
         //to solve problem of RepositoryManagerservice while haappen at runtime and the RepositoryContext happen at designime
-        
-public static void ConfigureSqlContext(this IServiceCollection services,IConfiguration configuration) =>
+        public static void ConfigureSqlContext(this IServiceCollection services,IConfiguration configuration) =>
         services.AddSqlServer<RepositoryContext>((configuration.GetConnectionString("sqlConnection")));
 
 
+
+        //for Identity
+        public static void ConfigureIdentity(this IServiceCollection services) 
+        {
+            var builder = services.AddIdentity<User, IdentityRole>(o =>
+            {
+                o.Password.RequireDigit = true;
+                o.Password.RequireLowercase = false;
+                o.Password.RequireLowercase = false;
+                o.Password.RequireNonAlphanumeric= false;
+                o.Password.RequiredLength = 10;
+                o.User.RequireUniqueEmail = true;
+                
+            })
+             .AddEntityFrameworkStores<RepositoryContext>()
+             .AddDefaultTokenProviders();
+                
+        }
+   
+    
     }
 }

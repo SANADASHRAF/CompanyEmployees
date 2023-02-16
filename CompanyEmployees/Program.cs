@@ -17,11 +17,12 @@ builder.Services.AddControllers()
 
 //using automapper
 builder.Services.AddAutoMapper(typeof(Program));
-
 //method in extention
 builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
-
+//identity
+builder.Services.AddAuthentication();
+builder.Services.ConfigureIdentity();
 
 var app = builder.Build();
 
