@@ -48,6 +48,7 @@ app.UseCors("CorsPolicy");
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 //adds endpoints for controller actions without specifying any routes.

@@ -28,6 +28,10 @@ namespace CompanyEmployees
             CreateMap<CompanyForUpdateWithInsertChieldDto, Company>();
             CreateMap<CompanyForUpdateWithOutInsertChieldDto, Company>();
 
+
+            //identity(authontication)
+            CreateMap<UserForRegistrationDto, User>();
+
         }
 
     }

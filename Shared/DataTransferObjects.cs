@@ -66,6 +66,23 @@ namespace Shared
             public string? Position { get; init; }
         };
 
+        //identity(authontication)
+        public record UserForRegistrationDto
+        {
+            public string? FirstName { get; init; }
+            public string? LastName { get; init; }
+            [Required(ErrorMessage = "Username is required")]
+            public string? UserName { get; init; }
+            [Required(ErrorMessage = "Password is required")]
+            public string? Password { get; init; }
+            public string? Email { get; init; }
+            public string? PhoneNumber { get; init; }
+            public ICollection<string>? Roles { get; init; }
+        }
+
+
+
+
         //public record CompanyForCreationDto(string Name, string Address, string Country,
         //                             IEnumerable<EmployeeCreationDto> Employees);
         //public record CompanyForUpdateWithInsertChieldDto(string Name, string Address, string Country,
