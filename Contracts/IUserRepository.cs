@@ -11,5 +11,7 @@ namespace Contracts
     public interface IUserRepository
     {
         Task<IdentityResult> RegisterUser(UserForRegistrationDto userForRegistration);
+        Task<bool> ValidateUser(UserLoginDto userForAuth);
+        Task<string> CreateToken();
     }
 }

@@ -21,7 +21,7 @@ namespace Repository
         private readonly Lazy<ICompanyRepository> _companyRepository;
         private readonly Lazy<IEmployeeRepository> _employeeRepository;
         private readonly Lazy<IUserRepository> _userRepository;
-        public RepositoryManager(RepositoryContext repositoryContext , IMapper mapper, UserManager<User> userManager)
+        public RepositoryManager(RepositoryContext repositoryContext , IMapper mapper, UserManager<User> userManager, IConfiguration configuration)
         {
             _repositoryContext = repositoryContext;
             _companyRepository = new Lazy<ICompanyRepository>(() => new
@@ -31,7 +31,7 @@ namespace Repository
             EmployeeRepository(repositoryContext));
 
             _userRepository = new Lazy<IUserRepository>(() =>
-            new UserRepository( userManager, mapper));
+            new UserRepository( userManager, mapper, configuration));
         }
         
         /// ta take object from repository user

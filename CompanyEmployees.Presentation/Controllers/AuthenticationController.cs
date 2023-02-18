@@ -24,6 +24,8 @@ namespace CompanyEmployees.Presentation.Controllers
             _userManager = userManager;
         }
 
+
+
         [HttpPost ]
         public async Task <IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistration)
         {
@@ -38,6 +40,16 @@ namespace CompanyEmployees.Presentation.Controllers
             }
             
             return StatusCode(201);
+        }
+
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login ([FromBody] UserLoginDto user)
+        {
+            if (!await _repository.userRepository.ValidateUser(user))
+                return Unauthorized();
+            return Ok(
+            new{ Token = await _repository.userRepository.CreateToken()});
         }
     }
 }
