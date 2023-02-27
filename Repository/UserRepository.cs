@@ -53,6 +53,7 @@ namespace Repository
                 return result;
              return result;
         }
+        //create token from 3 privete method 
         public async Task<string> CreateToken()
         {
             var signingCredentials = GetSigningCredentials();
@@ -60,12 +61,17 @@ namespace Repository
             var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
             return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
         }
+
+        //create secrete key
         private SigningCredentials GetSigningCredentials()
         {
-            var key = (Encoding.UTF8.GetBytes("this is my custom Secret key for authentication"));
+           // var key = (Encoding.UTF8.GetBytes("this is my custom Secret key for authentication"));
+            var key = Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("SECRET"));
             var secret = new SymmetricSecurityKey(key);
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
         }
+
+        //user and it's role that user belong to 
         private async Task<List<Claim>> GetClaims()
         {
             var claims = new List<Claim>

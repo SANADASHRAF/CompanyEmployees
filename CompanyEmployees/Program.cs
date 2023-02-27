@@ -29,7 +29,11 @@ var app = builder.Build();
 
 
 if (app.Environment.IsDevelopment())
+{
     app.UseDeveloperExceptionPage();
+   
+}
+
 else
          //HTTP Strict Transport Security "Protect websites from attacks by phishing attackers"
     app.UseHsts();
@@ -45,6 +49,7 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 
 // Configure the HTTP request pipeline.
 
+;
 app.UseCors("CorsPolicy");
 
 app.UseHttpsRedirection();

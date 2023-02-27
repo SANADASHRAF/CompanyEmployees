@@ -12,6 +12,8 @@ namespace CompanyEmployees.Extensions
    public static class ServiceExtensions
     {
         
+
+        //for cors
         public static void ConfigureCors(this IServiceCollection services) =>
          services.AddCors(options =>
          {
@@ -48,11 +50,13 @@ namespace CompanyEmployees.Extensions
                 o.Password.RequireDigit = true;
                 o.Password.RequireLowercase = false;
                 o.Password.RequireLowercase = false;
-                o.Password.RequireNonAlphanumeric= false;
+                o.Password.RequireNonAlphanumeric = false;
                 o.Password.RequiredLength = 10;
                 o.User.RequireUniqueEmail = true;
-                
+               
+
             })
+            
              .AddEntityFrameworkStores<RepositoryContext>()
              .AddDefaultTokenProviders();
                 

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Contracts;
 using Entities.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace CompanyEmployees.Presentation.Controllers
 {
     [Route("api/companies/[action]")]
     [ApiController]
+   
     public class CompaniesController : ControllerBase
     {
         private readonly IRepositoryManager _repository;
@@ -24,8 +26,9 @@ namespace CompanyEmployees.Presentation.Controllers
         }
 
 
-
+        [Authorize (Roles = "Administrator")]
         [HttpGet(Name = "GetCompanies")]
+        
         public IActionResult GetCompanies()
         {
             var companeies = _repository.Company.GetAllCompanies();

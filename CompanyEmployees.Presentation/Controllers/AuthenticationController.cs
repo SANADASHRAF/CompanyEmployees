@@ -26,7 +26,7 @@ namespace CompanyEmployees.Presentation.Controllers
 
 
 
-        [HttpPost ]
+        [HttpPost("RegisterUser") ]
         public async Task <IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistration)
         {
             var result = await _repository.userRepository.RegisterUser(userForRegistration);
